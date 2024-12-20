@@ -4,6 +4,7 @@ export default function Home() {
       <h1 className="text-center text-3xl font-bold text-secondary">
         Wellcome to the world of Next js{" "}
       </h1>
+      <p>Hello from next js </p>
     </div>
   );
 }
