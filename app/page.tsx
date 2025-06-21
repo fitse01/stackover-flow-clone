@@ -1,10 +1,13 @@
-export default function Home() {
+import React from "react";
+
+const page = () => {
   return (
     <div>
-      <h1 className="text-center text-3xl font-bold text-secondary">
-        Wellcome to the world of Next js{" "}
+      <h1 className="flex justify-center text-3xl text-blue-300">
+        Wellcome for the new NeXT js course{" "}
       </h1>
-      <p>Hello from next js </p>
     </div>
   );
-}
+};
+
+export default page;
