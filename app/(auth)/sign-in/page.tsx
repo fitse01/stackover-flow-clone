@@ -1,7 +1,14 @@
-import React from "react";
+import { signIn } from "@/auth";
 
-const SignIn = () => {
-  return <div>SignIn</div>;
-};
-
-export default SignIn;
+export default function SignIn() {
+  return (
+    <form
+      action={async () => {
+        "use server";
+        await signIn("github");
+      }}
+    >
+      <button type="submit">Signin with GitHub</button>
+    </form>
+  );
+}
