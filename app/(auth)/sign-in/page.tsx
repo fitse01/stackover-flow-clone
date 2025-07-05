@@ -1,14 +1,20 @@
-import { signIn } from "@/auth";
+"use client";
+import AuthForm from "@/components/forms/AuthForm";
+import { SignInSchema } from "@/lib/validations";
+import React from "react";
+import { _success } from "zod/v4/core";
 
-export default function SignIn() {
+const page = () => {
   return (
-    <form
-      action={async () => {
-        "use server";
-        await signIn("github");
-      }}
-    >
-      <button type="submit">Signin with GitHub</button>
-    </form>
+    <div>
+      <AuthForm
+        formType="SIGN_IN"
+        schema={SignInSchema}
+        defaultValue={{ email: "", password: "" }}
+        onSubmit={(data) => Promise.resolve({ success: true, data })}
+      />
+    </div>
   );
-}
+};
+
+export default page;
