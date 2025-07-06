@@ -10,7 +10,7 @@ const page = () => {
       <AuthForm
         formType="SIGN_IN"
         schema={SignInSchema}
-        defaultValue={{ email: "", password: "" }}
+        defaultValues={{ email: "", password: "" }}
         onSubmit={(data) => Promise.resolve({ success: true, data })}
       />
     </div>
