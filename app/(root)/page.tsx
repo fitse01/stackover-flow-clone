@@ -1,24 +1,13 @@
-import { auth, signOut } from "@/auth";
-import { Button } from "@/components/ui/button";
-import ROUTES from "@/constants/routes";
 import React, { use } from "react";
 
 const Home = async () => {
-  const session = await auth();
-  console.log(session);
   return (
     <div>
-      <form
-        className="px-6 pt-[100px] "
-        action={async () => {
-          "use server";
-          await signOut({
-            redirectTo: ROUTES.SIGN_IN,
-          });
-        }}
-      >
-        <Button type="submit">Log Out</Button>
-      </form>
+      <h1 className="text-3xl font-bold">Welcome to DevFlow</h1>
+      <p className="mt-4 text-lg">
+        This is the home page of your application. You can start building your
+        features here.
+      </p>
     </div>
   );
 };
