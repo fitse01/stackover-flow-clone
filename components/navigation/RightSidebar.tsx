@@ -1,10 +1,3 @@
-import React from "react";
-
-const rightSidebar = () => {
-  return <div>rightSidebar</div>;
-};
-
-export default rightSidebar;
 import ROUTES from "@/constants/routes";
 import Image from "next/image";
 import Link from "next/link";
