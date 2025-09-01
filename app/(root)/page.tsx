@@ -59,7 +59,17 @@ const questions = [
   },
 ];
 
-const Home = async () => {
+// query = 'react'
+interface SearchParams {
+  searchParams: Promise<{ [key: string]: string }>;
+}
+
+const Home = async ({ searchParams }: SearchParams) => {
+  const { query = "" } = await searchParams;
+
+  const filteredQuestions = questions.filter((question) =>
+    question.title.toLowerCase().includes(query?.toLowerCase())
+  );
   return (
     <>
       <section className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -82,7 +92,7 @@ const Home = async () => {
       </section>
       <section className="mt-5">HomeFilter</section>
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.map((question) => (
+        {filteredQuestions.map((question) => (
           <div
             key={question._id}
             className="background-light800_darkgradient rounded-lg p-6 cursor-pointer"
