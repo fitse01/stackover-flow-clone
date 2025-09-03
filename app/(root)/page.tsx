@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import HomeFilter from "@/components/filters/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
@@ -90,7 +91,7 @@ const Home = async ({ searchParams }: SearchParams) => {
           oterClass="flex-1"
         />
       </section>
-      <section className="mt-5">HomeFilter</section>
+      <HomeFilter />
       <div className="mt-10 flex w-full flex-col gap-6">
         {filteredQuestions.map((question) => (
           <div
