@@ -17,15 +17,15 @@ interface Props {
 const LocalSearch = ({ route, imgSrc, placeholder, oterClass }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
-  const searchParam = useSearchParams();
-  const query = searchParam.get("query") || "";
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query") || "";
   const [searchQuery, setSearchQuery] = useState(query);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       if (searchQuery) {
         const newUrl = formUrlQuery({
-          params: searchParam.toString(),
+          params: searchParams.toString(),
           key: "query",
           value: searchQuery,
         });
@@ -33,7 +33,7 @@ const LocalSearch = ({ route, imgSrc, placeholder, oterClass }: Props) => {
       } else {
         if (pathname === route) {
           const newUrl = removeKeysFromUrlQuery({
-            params: searchParam.toString(),
+            params: searchParams.toString(),
             keysToRemove: ["query"],
           });
           router.push(newUrl, { scroll: false });
@@ -43,7 +43,7 @@ const LocalSearch = ({ route, imgSrc, placeholder, oterClass }: Props) => {
     }, 500);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchQuery, router, route, searchParam, pathname]);
+  }, [searchQuery, router, route, searchParams, pathname]);
 
   return (
     <div
