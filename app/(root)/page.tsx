@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import QuestionCards from "@/components/cards/QuestionCards";
 import HomeFilter from "@/components/filters/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,8 @@ const questions = [
     author: {
       _id: "u1",
       name: "John Doe",
+      image:
+        "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001877.png",
     },
     upvotes: 10,
     answers: 2,
@@ -35,6 +38,8 @@ const questions = [
     author: {
       _id: "u2",
       name: "Jane Smith",
+      image:
+        "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001877.png",
     },
     upvotes: 5,
     answers: 1,
@@ -52,6 +57,8 @@ const questions = [
     author: {
       _id: "u3",
       name: "Alice Johnson",
+      image:
+        "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001877.png",
     },
     upvotes: 8,
     answers: 3,
@@ -100,29 +107,30 @@ const Home = async ({ searchParams }: SearchParams) => {
       <HomeFilter />
       <div className="mt-10 flex w-full flex-col gap-6">
         {filteredQuestions.map((question) => (
-          <div
-            key={question._id}
-            className="background-light800_darkgradient rounded-lg p-6 cursor-pointer"
-          >
-            <h2 className="h2-medium text-dark100_light900">
-              {question.title}
-            </h2>
-            <p className="mt-2 text-dark500_light700">{question.description}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {question.tags.map((tag) => (
-                <span
-                  key={tag._id}
-                  className="background-light300_dark700 text-dark600_light400 rounded-full px-3 py-1 text-sm"
-                >
-                  {tag.name}
-                </span>
-              ))}
-            </div>
-            <div className="mt-4 flex items-center justify-between text-sm text-dark500_light700">
-              <span>Asked by {question.author.name}</span>
-              <span>{question.createdAt.toDateString()}</span>
-            </div>
-          </div>
+          <QuestionCards key={question._id} question={question} />
+          // <div
+          //   key={question._id}
+          //   className="background-light800_darkgradient rounded-lg p-6 cursor-pointer"
+          // >
+          //   <h2 className="h2-medium text-dark100_light900">
+          //     {question.title}
+          //   </h2>
+          //   <p className="mt-2 text-dark500_light700">{question.description}</p>
+          //   <div className="mt-4 flex flex-wrap gap-2">
+          //     {question.tags.map((tag) => (
+          //       <span
+          //         key={tag._id}
+          //         className="background-light300_dark700 text-dark600_light400 rounded-full px-3 py-1 text-sm"
+          //       >
+          //         {tag.name}
+          //       </span>
+          //     ))}
+          //   </div>
+          //   <div className="mt-4 flex items-center justify-between text-sm text-dark500_light700">
+          //     <span>Asked by {question.author.name}</span>
+          //     <span>{question.createdAt.toDateString()}</span>
+          //   </div>
+          // </div>
         ))}
       </div>
     </>
