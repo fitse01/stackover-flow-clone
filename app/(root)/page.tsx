@@ -4,6 +4,8 @@ import HomeFilter from "@/components/filters/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
+import handleError from "@/lib/handlers/error";
+import { ValidationError } from "@/lib/http-errors";
 import Link from "next/link";
 import React, { use } from "react";
 
@@ -67,12 +69,24 @@ const questions = [
   },
 ];
 
+const test = async () => {
+  try {
+    throw new ValidationError({
+      title: ["Required"],
+      tags: ['"JavaScript" is not a valid tag.'],
+    });
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
 // query = 'react'
 interface SearchParams {
   searchParams: Promise<{ [key: string]: string }>;
 }
 
 const Home = async ({ searchParams }: SearchParams) => {
+  await test();
   const { query = "", filter = "" } = await searchParams;
 
   const filteredQuestions = questions.filter((question) => {
@@ -108,29 +122,6 @@ const Home = async ({ searchParams }: SearchParams) => {
       <div className="mt-10 flex w-full flex-col gap-6">
         {filteredQuestions.map((question) => (
           <QuestionCards key={question._id} question={question} />
-          // <div
-          //   key={question._id}
-          //   className="background-light800_darkgradient rounded-lg p-6 cursor-pointer"
-          // >
-          //   <h2 className="h2-medium text-dark100_light900">
-          //     {question.title}
-          //   </h2>
-          //   <p className="mt-2 text-dark500_light700">{question.description}</p>
-          //   <div className="mt-4 flex flex-wrap gap-2">
-          //     {question.tags.map((tag) => (
-          //       <span
-          //         key={tag._id}
-          //         className="background-light300_dark700 text-dark600_light400 rounded-full px-3 py-1 text-sm"
-          //       >
-          //         {tag.name}
-          //       </span>
-          //     ))}
-          //   </div>
-          //   <div className="mt-4 flex items-center justify-between text-sm text-dark500_light700">
-          //     <span>Asked by {question.author.name}</span>
-          //     <span>{question.createdAt.toDateString()}</span>
-          //   </div>
-          // </div>
         ))}
       </div>
     </>
