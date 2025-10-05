@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(tickets);
   }
   const filteredTickets = tickets.filter((ticket) =>
-    ticket.name.toLowerCase().includes(query)
+    ticket.name.toLowerCase().includes(query.toLowerCase())
   );
   return NextResponse.json(filteredTickets);
 }
