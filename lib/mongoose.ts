@@ -25,7 +25,18 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
 }
 
-export const dbConnect = async (): Promise<Mongoose> => {
+const dbConnect = async (): Promise<Mongoose> => {
+  // console.log("Current MONGODB_URI value:", process.env.MONGODB_URI);
+  // console.log("Type of MONGODB_URI:", typeof process.env.MONGODB_URI);
+  // console.log(
+  //   "Length of MONGODB_URI:",
+  //   process.env.MONGODB_URI?.length ?? "undefined"
+  // );
+
+  if (!process.env.MONGODB_URI) {
+    throw new Error("MONGODB_URI is not defined in environment variables!");
+  }
+
   if (cached.conn) {
     return cached.conn;
   }
@@ -47,3 +58,5 @@ export const dbConnect = async (): Promise<Mongoose> => {
   cached.conn = await cached.promise;
   return cached.conn;
 };
+
+export default dbConnect;

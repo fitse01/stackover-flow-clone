@@ -69,16 +69,16 @@ const questions = [
   },
 ];
 
-const test = async () => {
-  try {
-    throw new ValidationError({
-      title: ["Required"],
-      tags: ['"JavaScript" is not a valid tag.'],
-    });
-  } catch (error) {
-    return handleError(error);
-  }
-};
+// const test = async () => {
+//   try {
+//     throw new ValidationError({
+//       title: ["Required"],
+//       tags: ['"JavaScript" is not a valid tag.'],
+//     });
+//   } catch (error) {
+//     return handleError(error);
+//   }
+// };
 
 // query = 'react'
 interface SearchParams {
@@ -86,7 +86,7 @@ interface SearchParams {
 }
 
 const Home = async ({ searchParams }: SearchParams) => {
-  await test();
+  // await test();
   const { query = "", filter = "" } = await searchParams;
 
   const filteredQuestions = questions.filter((question) => {
